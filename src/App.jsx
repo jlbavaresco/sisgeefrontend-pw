@@ -14,6 +14,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 import Predio from './componentes/telas/predio/Predio'
 
+import Sala from './componentes/telas/sala/Sala'
+
 
 function App() {
 
@@ -27,6 +29,7 @@ function App() {
 
         <Route exact path="/" element={<Home />} />
         <Route exact path="/predios" element={<Predio/>}/>
+        <Route exact path="/salas" element={<Sala/>}/>
 
       </Routes>
 
