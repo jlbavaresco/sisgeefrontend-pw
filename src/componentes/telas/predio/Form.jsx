@@ -4,8 +4,27 @@ import PredioContext from './PredioContext';
 
 function Form() {
 
-    const { objeto, handleChange, acaoCadastrar, alerta } 
-    = useContext(PredioContext);
+    const { objeto, handleChange, acaoCadastrar, alerta }
+        = useContext(PredioContext);
+
+    (() => {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        const forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+
+                form.classList.add('was-validated')
+            }, false)
+        })
+    })()
 
     return (
 
@@ -17,7 +36,8 @@ function Form() {
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
 
-                    <form id="formulario" onSubmit={acaoCadastrar}>
+                    <form id="formulario" onSubmit={acaoCadastrar}
+                        className="needs-validation" noValidate>
                         <div className="modal-body">
                             <Alerta alerta={alerta} />
                             <div className="form-group">
@@ -48,6 +68,12 @@ function Form() {
                                     onChange={handleChange}
                                     required
                                 />
+                                <div className="valid-feedback">
+                                    Nome OK!
+                                </div>
+                                <div className="invalid-feedback">
+                                    Nome deve ser informado
+                                </div>                                
                             </div>
 
                             <div className="form-group">
@@ -56,13 +82,19 @@ function Form() {
                                 </label>
                                 <input
                                     type="text"
-                                   className="form-control"
+                                    className="form-control"
                                     id="txtDescricao"
                                     name="descricao"
                                     value={objeto.descricao}
                                     onChange={handleChange}
                                     required
                                 />
+                                <div className="valid-feedback">
+                                    Descrição OK!
+                                </div>
+                                <div className="invalid-feedback">
+                                    Descrição deve ser informada
+                                </div>                                
                             </div>
 
                             <div className="form-group">
@@ -79,6 +111,12 @@ function Form() {
                                     onChange={handleChange}
                                     required
                                 />
+                                <div className="valid-feedback">
+                                    Sigla OK!
+                                </div>
+                                <div className="invalid-feedback">
+                                    Sigla deve ser informada
+                                </div>                                
                             </div>
                         </div>
                         <div className="modal-footer">
